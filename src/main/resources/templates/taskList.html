@@ -5,7 +5,55 @@
 <h1 th:utext="${title}">..!..</h1>
 <h2 th:utext="${message}">..!..</h2>
 
+<table border="1">
+    <tr>
+        <th>Заголовок</th>
+        <th>Текст</th>
+        <th>Автор</th>
+        <th></th>
+    </tr>
+    <tr th:each="task : ${tasks}">
+        <td th:utext="${task.title}">...</td>
+        <td th:utext="${task.text}">...</td>
+        <td th:utext="${task.author}">...</td>
+        <td>
+            <button class="btn-delete" th:id="${task.id}">Удалить</button>
+        </td>
+    </tr>
+</table>
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 <div th:replace="fragments/footer :: footer"></div>
+
+<form th:action="@{/addTask}"
+      th:object="${taskForm}" method="POST">
+    
+<form>
+    <table>
+        <tr>
+            <th>Заголовок</th>
+            <td>
+                <input type="text" th:field="*{title}"/>
+            </td>
+        </tr>
+        <tr>
+            <th>Текст</th>
+            <td>
+                <input type="text" th:field="*{text}"/>
+            </td>
+        </tr>
+        <tr>
+            <th>Автор</th>
+            <td>
+                <input type="text" th:field="*{author}"/>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2" align="center">
+                <input type="submit" value="Добавить"/>
+            </td>
+        </tr>
+    </table>
+</form>
 
 </body>
 </html>
